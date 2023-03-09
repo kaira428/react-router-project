@@ -1,15 +1,25 @@
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useRoutes } from "react-router-dom";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import "./App.css";
 import BookRoutes from "./BookRoutes";
 
 function App() {
+  let element = useRoutes([
+    {
+      path: "/",
+      element: <Home />,
+    },
+    {
+      path: "*",
+      element: <NotFound />,
+    },
+  ]);
   return (
     <>
-    <Routes location='/'>
-      <Route path='/' element={<h1>Extra Info</h1>} />
-    </Routes>
+      <Routes location="/">
+        <Route path="/" element={<h1>Extra Info</h1>} />
+      </Routes>
       <nav>
         <ul>
           <li>
@@ -20,11 +30,13 @@ function App() {
           </li>
         </ul>
       </nav>
-      <Routes>
+
+      {element}
+      {/* <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/books/*" element={<BookRoutes />} />
         <Route path="*" element={<NotFound />} />
-      </Routes>
+      </Routes> */}
     </>
   );
 }
