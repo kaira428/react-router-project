@@ -1,10 +1,15 @@
-import { useParams } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
 
 const Book = () => {
     const {bookId} = useParams();
-    console.log(bookId)
+    const {hello} = useOutletContext();
 
-    return ( <h1>Book {bookId}</h1> );
+    return ( 
+    <>
+    <h1>Book {bookId}</h1>
+    <h3> Hello {hello}</h3>
+    </>
+    );
 }
  
 export default Book;
