@@ -1,7 +1,10 @@
 import { Link, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
+// import BookList from "./pages/BookList";
+import Book from "./pages/Book";
 import BookList from "./pages/BookList";
 import NewBook from "./pages/NewBook";
+import NotFound from "./pages/NotFound";
 import "./App.css";
 
 function App() {
@@ -15,15 +18,17 @@ function App() {
           <li>
             <Link to="/books">Book List</Link>
           </li>
-          <li>
-            <Link to="/newbook">New Book</Link>
-          </li>
         </ul>
       </nav>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/books" element={<BookList />} />
-        <Route path="/newbook" element={<NewBook />} />
+        <Route path="/books">
+          <Route index element={<BookList />} />
+          <Route path=":bookId" element={<Book />} />
+          <Route path="new" element={<NewBook />} />
+        </Route>
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
